@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    private Signpost target;
+    private Signpost target, endSingpost;
     public float speed = 1;
-    public bool showPath = true;
     public float minDistance = 0.1f;
     public float health = 10;
+    private bool passed;
 
 #if UNITY_EDITOR
+    public bool showPath = true;
+
     private void Awake() {
         CheckStartSignpost();
     }
@@ -23,17 +25,24 @@ public class Enemy : MonoBehaviour {
 
     void Start () {
         target = GameObject.FindGameObjectWithTag("Start Signpost").GetComponent<Signpost>();
-	}
+        endSingpost = GameObject.FindGameObjectWithTag("End Signpost").GetComponent<Signpost>();
+    }
 	
 	void Update () {
-        RotateToTarget();
-        MoveToTarget();
+        if (passed) {
+            Attack();
+        } else {
+            RotateToTarget();
+            MoveToTarget();
+            if (Vector2.Distance(transform.position, target.transform.position) < minDistance)
+                target = target.nextSignpost;
+#if UNITY_EDITOR
+            if (showPath)
+                ShowPath();
+#endif
 
-        if (Vector2.Distance(transform.position, target.transform.position) < minDistance)
-            target = target.nextSignpost;
-
-        if (showPath)
-            ShowPath();
+            passed = Vector2.Distance(transform.position, endSingpost.transform.position) < minDistance;
+        }
     }
 
     private void RotateToTarget() {
@@ -49,8 +58,16 @@ public class Enemy : MonoBehaviour {
         transform.Translate(move);
     }
 
+#if UNITY_EDITOR
     private void ShowPath() {
-        Debug.DrawLine(transform.position, target.transform.position, Color.blue);
+        if (target != null)
+            Debug.DrawLine(transform.position, target.transform.position, Color.blue);
+    }
+#endif
+
+    private void Attack() {
+        FindObjectOfType<GameController>().Pass();
+        Kill();
     }
 
     public void Hit(float dmg) {

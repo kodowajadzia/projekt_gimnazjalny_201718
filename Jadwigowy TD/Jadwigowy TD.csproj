@@ -310,7 +310,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Jadwigowy TD\Scripts\Attack Path\Signpost.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\Border.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\GameController.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Bullet.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Tower.cs" />
   </ItemGroup>

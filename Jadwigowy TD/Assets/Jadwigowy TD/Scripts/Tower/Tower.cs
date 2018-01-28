@@ -10,7 +10,7 @@ public class Tower : MonoBehaviour {
     public GameObject bullet;
 
 #if UNITY_EDITOR
-    public bool showTarget = true;
+    public bool showTarget = true, showRange = true;
 #endif
 
     void Update () {
@@ -65,4 +65,13 @@ public class Tower : MonoBehaviour {
         rot = rot * Quaternion.Euler(0, 90, 0);//przykre, ale "rot *=" nie działa :(
         transform.rotation = rot;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos() {
+        if (showRange) {
+            Gizmos.color = new Color(1, 1, 1, 0.5f);
+            Gizmos.DrawSphere(transform.position, range);
+        }
+    }
+#endif
 }
