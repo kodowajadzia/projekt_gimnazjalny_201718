@@ -6,35 +6,47 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Signpost : MonoBehaviour {
 
-    public const string START_SIGNPOST_TAG = "Start Signpost", END_SIGNPOST_TAG = "End Signpost";
+    public const string TagStartSignpost = "Start Signpost";
 
-    public Signpost nextSignpost;
+    [SerializeField] private Signpost nextSignpost;
+    public Signpost NextSignpost { get { return nextSignpost; } }
 
-#if UNITY_EDITOR
-    public bool showPath = true;
+    private Type singpostType = Type.Medial;
+    public Type SingpostType { get { return singpostType; } }
 
-    private void Start() {
-        if (nextSignpost == null && gameObject.tag != END_SIGNPOST_TAG)
-            Debug.LogError("If the signpost is the lost one it should has a " + END_SIGNPOST_TAG + " tag.");
+    public enum Type {
+        Start,
+        Medial,
+        End,
     }
 
-    void Update () {
+    private void Awake() {
+        if (nextSignpost == null)
+            singpostType = Type.End;
+        else if (tag == TagStartSignpost)
+            singpostType = Type.Start;
+        else
+            singpostType = Type.Medial;
+    }
+
+#if UNITY_EDITOR
+    [SerializeField] private bool showPath = true;
+
+    private readonly Vector3 offset = new Vector3(0, 1);
+
+    void Update() {
         if (showPath) {
             if (nextSignpost != null)
                 Debug.DrawLine(transform.position, nextSignpost.transform.position, Color.red);
-        }   
-	}
-
-    private void OnDrawGizmos() {
-        if (tag == START_SIGNPOST_TAG) {
-            Vector3 offset = new Vector3(0, 1);
-            Handles.Label(transform.position + offset, "Start");
-        }
-        if(tag == END_SIGNPOST_TAG) {
-            Vector3 offset = new Vector3(0, 1);
-            Handles.Label(transform.position + offset, "End");
         }
     }
-#endif
 
+    private void OnDrawGizmos() {
+        if (tag == TagStartSignpost)
+            Handles.Label(transform.position + offset, "Start");
+
+        if (SingpostType == Type.End)
+            Handles.Label(transform.position + offset, "End");
+    }
+#endif
 }

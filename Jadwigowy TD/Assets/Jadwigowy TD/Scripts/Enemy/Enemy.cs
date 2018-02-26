@@ -4,51 +4,46 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    private Signpost target, endSingpost;
-    public float speed = 1;
-    public float minDistance = 0.1f;
-    public float health = 10;
+    private Signpost targetSignpost;
+    [SerializeField] private float
+        speed = 1,
+        minDistance = 0.1f,
+        health = 10;
     private bool passed;
 
 #if UNITY_EDITOR
-    public bool showPath = true;
-
-    private void Awake() {
-        CheckStartSignpost();
-    }
-
-    private void CheckStartSignpost() {
-        GameObject[] startSignposts = GameObject.FindGameObjectsWithTag("Start Signpost");
-        Debug.Assert(startSignposts.Length == 1, "Hmm, the emenies don't konw where is the appropriate Start Signpost. Check how many objects have the \"Start Signpost\" tag.");
-    }
+    [SerializeField] private bool showPath = true;
 #endif
 
-    void Start () {
-        target = GameObject.FindGameObjectWithTag("Start Signpost").GetComponent<Signpost>();
-        endSingpost = GameObject.FindGameObjectWithTag("End Signpost").GetComponent<Signpost>();
+    private void Awake() {
+        // There must be a starting signpost with a "Start Signpost" tag.
+        targetSignpost = GameObject.FindGameObjectWithTag(Signpost.TagStartSignpost).GetComponent<Signpost>();
     }
-	
-	void Update () {
+
+    private void Update() {
         if (passed) {
             Attack();
         } else {
             RotateToTarget();
             MoveToTarget();
-            if (Vector2.Distance(transform.position, target.transform.position) < minDistance)
-                target = target.nextSignpost;
+
+            if (targetSignpost.SingpostType == Signpost.Type.End)
+                passed = Vector2.Distance(transform.position, targetSignpost.transform.position) < minDistance;
+
+            if (Vector2.Distance(transform.position, targetSignpost.transform.position) < minDistance)
+                targetSignpost = targetSignpost.NextSignpost;
+
 #if UNITY_EDITOR
             if (showPath)
                 ShowPath();
-#endif
-
-            passed = Vector2.Distance(transform.position, endSingpost.transform.position) < minDistance;
+#endif  
         }
     }
 
     private void RotateToTarget() {
-        Vector3 relativePos = target.transform.position - transform.position;
+        Vector3 relativePos = targetSignpost.transform.position - transform.position;
         Quaternion rot = Quaternion.LookRotation(relativePos);
-        rot = rot * Quaternion.Euler(0, 90, 0);//przykre, ale "rot *=" nie działa :(
+        rot *= Quaternion.Euler(0, 90, 0);
         transform.rotation = rot;
     }
 
@@ -60,23 +55,23 @@ public class Enemy : MonoBehaviour {
 
 #if UNITY_EDITOR
     private void ShowPath() {
-        if (target != null)
-            Debug.DrawLine(transform.position, target.transform.position, Color.blue);
+        if (targetSignpost != null)
+            Debug.DrawLine(transform.position, targetSignpost.transform.position, Color.blue);
     }
 #endif
 
     private void Attack() {
         FindObjectOfType<GameController>().Pass();
-        Kill();
+        Die();
     }
 
     public void Hit(float dmg) {
         health -= dmg;
         if (health <= 0)
-            Kill();
+            Die();
     }
 
-    private void Kill() {
+    private void Die() {
         Debug.Log(gameObject.name + " inactivated");
         Destroy(gameObject);
     }

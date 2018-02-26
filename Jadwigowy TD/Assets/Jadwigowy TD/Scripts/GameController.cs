@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public int passes = 5;
+    [SerializeField] private int maxPasses = 5, passes;
 
     public void Pass() {
-        passes--;
-        if (passes <= 0)
+        passes++;
+        if (passes > maxPasses)
             Lose();
     }
 

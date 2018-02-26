@@ -470,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eca2edc054f269479e11b831d06892e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPasses: 5
   passes: 5
 --- !u!4 &1097253394
 Transform:
@@ -526,10 +527,6 @@ Prefab:
     - target: {fileID: 1673195516949880, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_Name
       value: Signpost End
-      objectReference: {fileID: 0}
-    - target: {fileID: 1673195516949880, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
-      propertyPath: m_TagString
-      value: End Signpost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
