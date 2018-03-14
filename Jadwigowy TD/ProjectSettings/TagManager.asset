@@ -39,6 +39,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Map
+    uniqueID: 4216249993
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tower
+    uniqueID: 1564826161
     locked: 0

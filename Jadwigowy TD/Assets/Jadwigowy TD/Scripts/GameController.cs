@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    [SerializeField] private int maxPasses = 5, passes;
+    [SerializeField] private int maxPasses = 5;
+    private int passes;
+    private float money = 100;
+    public float Money { get { return money; } set { money = value; } }
 
     public void Pass() {
         passes++;

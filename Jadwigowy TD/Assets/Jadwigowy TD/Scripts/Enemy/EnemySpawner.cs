@@ -3,13 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType {
-    ToTests,
-};
-
 public class EnemySpawner : MonoBehaviour {
 
-    public GameObject[] enemysPrefabs;
+    [SerializeField] private GameObject[] enemysPrefabs;
 
 #if UNITY_EDITOR
     private void Awake() {
@@ -27,6 +23,13 @@ public class EnemySpawner : MonoBehaviour {
             Debug.Assert(gameObject != null, "A null enemy?");
     }
 #endif
+
+    private void Update() {
+        //TODO replace this with some smawn-system
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Spawn(EnemyType.FirstClassHS);
+        }
+    }
 
     public void Spawn(EnemyType type) {
         GameObject ins = Instantiate(enemysPrefabs[(int)type]);

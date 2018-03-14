@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class Signpost : MonoBehaviour {
 
-    public const string TagStartSignpost = "Start Signpost";
+    public const string StartSignpostTag = "Start Signpost";
 
     [SerializeField] private Signpost nextSignpost;
     public Signpost NextSignpost { get { return nextSignpost; } }
@@ -23,7 +25,7 @@ public class Signpost : MonoBehaviour {
     private void Awake() {
         if (nextSignpost == null)
             singpostType = Type.End;
-        else if (tag == TagStartSignpost)
+        else if (tag == StartSignpostTag)
             singpostType = Type.Start;
         else
             singpostType = Type.Medial;
@@ -42,7 +44,7 @@ public class Signpost : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        if (tag == TagStartSignpost)
+        if (tag == StartSignpostTag)
             Handles.Label(transform.position + offset, "Start");
 
         if (SingpostType == Type.End)

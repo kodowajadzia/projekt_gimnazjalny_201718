@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
 
     private void Awake() {
         // There must be a starting signpost with a "Start Signpost" tag.
-        targetSignpost = GameObject.FindGameObjectWithTag(Signpost.TagStartSignpost).GetComponent<Signpost>();
+        targetSignpost = GameObject.FindGameObjectWithTag(Signpost.StartSignpostTag).GetComponent<Signpost>();
     }
 
     private void Update() {
