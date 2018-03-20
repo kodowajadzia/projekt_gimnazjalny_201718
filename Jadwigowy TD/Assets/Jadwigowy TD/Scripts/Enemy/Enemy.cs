@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour {
         minDistance = 0.1f,
         health = 10;
     private bool passed;
+    public const string Tag = "Enemy";
 
 #if UNITY_EDITOR
     [SerializeField] private bool showPath = true;

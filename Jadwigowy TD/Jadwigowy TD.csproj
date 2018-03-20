@@ -310,7 +310,7 @@
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Bullet.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Tower.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\DraggableTeacher.cs" />
-    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\StartGameButton.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\StartEndlessModeButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

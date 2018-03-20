@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 50064034554129090}
   m_Layer: 0
   m_Name: Enemy 3 gimnazjum
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
