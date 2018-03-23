@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    [SerializeField] private float speed = 3;
-    private float dmg;
+    [SerializeField] private float speed = 3, dmg = 1;
 
     private void Update() {
         Move();
     }
 
     private void Move() {
-        Vector2 move = new Vector2(-speed, 0);
+        Vector2 move = new Vector2(speed, 0);
         move *= Time.deltaTime;
         transform.Translate(move);
     }

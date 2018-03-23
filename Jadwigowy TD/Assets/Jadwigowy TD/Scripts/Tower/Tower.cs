@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
-    [SerializeField] private float range = 3, dmg = 1, cooldown = 1;
+    [SerializeField] private float range = 3, cooldown = 1;
     private float timer;
     private Enemy target;
     [SerializeField] private GameObject bullet;
@@ -55,13 +55,33 @@ public class Tower : MonoBehaviour {
         GameObject ins = Instantiate(bullet);
         ins.transform.position = transform.position;
         ins.transform.rotation = transform.rotation;
-        ins.GetComponent<Bullet>().SetDmg(dmg);
     }
 
     private void LookAtTarget() {
-        Vector3 relativePos = target.transform.position - transform.position;
-        Quaternion rot = Quaternion.LookRotation(relativePos);
-        rot *= Quaternion.Euler(0, 90, 0);
+        float x = target.transform.position.x - transform.position.x;
+        x = (x < 0) ? -x : x;
+        float y = target.transform.position.y - transform.position.y;
+        y = (y < 0) ? -y : y;
+
+        float angleZ = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+
+        if (target.transform.position.x > transform.position.x && target.transform.position.y > transform.position.y)
+            angleZ = angleZ;
+        else if (target.transform.position.x < transform.position.x && target.transform.position.y > transform.position.y)
+            angleZ = 180 - angleZ;
+        else if (target.transform.position.x < transform.position.x && target.transform.position.y < transform.position.y)
+            angleZ = 180 + angleZ;
+        else if (target.transform.position.x > transform.position.x && target.transform.position.y < transform.position.y)
+            angleZ = 360 - angleZ;
+
+        float angleY;
+
+        if (target.transform.position.x > transform.position.x)
+            angleY = 0;
+        else
+            angleY = 180;
+
+        Quaternion rot = Quaternion.Euler(0, 0, angleZ) * Quaternion.Euler(angleY, 0, 0);
         transform.rotation = rot;
     }
 

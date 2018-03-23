@@ -8,27 +8,29 @@ public class GameController : MonoBehaviour {
     [SerializeField] private int maxPasses = 5;
     private int passes;
 
-    private float money = 100;
-    public float Money { get { return money; } set { money = value; } }
-
-    private int score;//score awarding
-
+    private float money = 100f;
     public const string currency = "BTC";
+    public float Money { get { return money; } set { money = value; } }
+    private int score;// TODO score awarding
 
-    private float difficultyLevel = 1;
+    [SerializeField] private Canvas gameOverCanvas;
 
-    [SerializeField] private Text moneyText, scoreText;
-
+    private float difficultyLevel;
+    [SerializeField] private float difficultyIncrease = 5f, difficultyRange = 100f;
+    [SerializeField] private GameObject[] enemiesPrefabs;
     [SerializeField] private EnemySpawner spawner;
     private bool isWaveInProgress, spawned;
-    private int wave;
-    private const float SpawnCooldownInSeconds = 1, StartWaveDelayInSeconds = 5, WaveDelayInSeconds = 3;
+
+    private const float
+        SpawnCooldownInSeconds = 1f,
+        StartWaveDelayInSeconds = 5f,
+        WaveDelayInSeconds = 3f;
+
     public bool AreEnemiesAlive {
         get {
             return GameObject.FindGameObjectsWithTag(Enemy.Tag).Length > 0;
         }
     }
-
     private bool isPlaying;
 
     private void Awake() {
@@ -36,6 +38,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
+        gameOverCanvas.enabled = false;
         isPlaying = true;
     }
 
@@ -49,9 +52,17 @@ public class GameController : MonoBehaviour {
     public IEnumerator SpawnWave(int enemies) {
         isWaveInProgress = true;
         spawned = false;
-        wave++;
-        for (int i = 0; i < enemies; i++) {
-            spawner.Spawn(EnemyType.FourthClassPS);
+        GameObject enemyPrafab = null;
+
+        int i = 1;
+        while (i <= enemiesPrefabs.Length && enemyPrafab == null) {
+            if (enemies <= i * difficultyRange)
+                enemyPrafab = enemiesPrefabs[i - 1];
+            i++;
+        }
+
+        for (i = 0; i < enemies; i++) {
+            spawner.Spawn(enemyPrafab);
             yield return new WaitForSeconds(SpawnCooldownInSeconds);
         }
         spawned = true;
@@ -60,7 +71,7 @@ public class GameController : MonoBehaviour {
     private void Update() {
         if (isPlaying) {
             if (!isWaveInProgress) {
-                difficultyLevel += Mathf.Max(3, 6 - wave);//hardcoded :P
+                difficultyLevel += difficultyIncrease;
                 StartCoroutine(SpawnWaveWithDelay((int)difficultyLevel, WaveDelayInSeconds));
             }
             if (isWaveInProgress && spawned && !AreEnemiesAlive)
@@ -70,15 +81,23 @@ public class GameController : MonoBehaviour {
 
     public void Pass() {
         passes++;
-        if (passes > maxPasses)
+        if (passes >= maxPasses)
             Lose();
     }
 
     public void Lose() {
+        // TODO ending
         isPlaying = false;
         Debug.Log("game over");
+        Time.timeScale = 0;
+        gameOverCanvas.enabled = true;
     }
 
+    private void OnDestroy() {
+        Time.timeScale = 1;
+    }
+
+    [SerializeField] private Text moneyText, scoreText;
     private void OnGUI() {
         moneyText.text = Money + " " + currency;
         scoreText.text = score.ToString();

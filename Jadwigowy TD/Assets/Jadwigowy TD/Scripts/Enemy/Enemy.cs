@@ -73,7 +73,6 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Die() {
-        Debug.Log(gameObject.name + " inactivated");
         Destroy(gameObject);
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace UI {
-    public class StartEndlessModeButton : MonoBehaviour {
+    public class BackToMainMenuButton : MonoBehaviour {
 
-        public void StartMode() {
-            SceneManager.LoadScene("Scenes/Endless Mode");
+        public void BackToMainMenu() {
+            SceneManager.LoadScene(0);
         }
     }
 }
