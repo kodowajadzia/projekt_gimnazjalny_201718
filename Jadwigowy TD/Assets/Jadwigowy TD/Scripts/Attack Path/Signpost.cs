@@ -13,23 +13,23 @@ public class Signpost : MonoBehaviour {
     [SerializeField] private Signpost nextSignpost;
     public Signpost NextSignpost { get { return nextSignpost; } }
 
-    private Type singpostType = Type.Medial;
-    public Type SingpostType { get { return singpostType; } }
-
     public enum Type {
         Start,
         Medial,
         End,
     }
 
-    private void Awake() {
-        if (nextSignpost == null)
-            singpostType = Type.End;
-        else if (tag == StartSignpostTag)
-            singpostType = Type.Start;
-        else
-            singpostType = Type.Medial;
+    public Type SingpostType {
+        get {
+            if (nextSignpost == null)
+                return Type.End;
+            else if (tag == StartSignpostTag)
+                return Type.Start;
+            else
+                return Type.Medial;
+        }
     }
+    
 
 #if UNITY_EDITOR
     [SerializeField] private bool showPath = true;

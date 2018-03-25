@@ -23,8 +23,4 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
-    public void SetDmg(float dmg) {
-        this.dmg = dmg;
-    }
 }

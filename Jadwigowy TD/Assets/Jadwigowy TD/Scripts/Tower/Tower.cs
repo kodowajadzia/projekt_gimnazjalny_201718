@@ -9,6 +9,21 @@ public class Tower : MonoBehaviour {
     private Enemy target;
     [SerializeField] private GameObject bullet;
 
+    public float Range {
+        get { return range; }
+        set { range = value; }
+    }
+
+    public float Cooldown {
+        get { return cooldown; }
+        set { cooldown = value; }
+    }
+
+    public GameObject Bullet {
+        get { return bullet; }
+        set { bullet = value; }
+    }
+
 #if UNITY_EDITOR
     [SerializeField] private bool showTarget = true, showRange = true;
 #endif
@@ -19,10 +34,10 @@ public class Tower : MonoBehaviour {
         timer += Time.deltaTime;
 
         if (target != null) {
-            LookAtTarget();
-            if (timer > cooldown) {
+            LookAt(target.transform);
+            if (timer > Cooldown) {
                 timer = 0;
-                Attack();
+                Shoot();
             }
         }
 
@@ -34,7 +49,7 @@ public class Tower : MonoBehaviour {
 
     private bool IsOutOfRange(Vector3 targetPosition) {
         float distace = Vector2.Distance(transform.position, targetPosition);
-        return distace > range;
+        return distace > Range;
     }
 
     private Enemy GetEnemyOrNull() {
@@ -51,13 +66,13 @@ public class Tower : MonoBehaviour {
         return enemy;
     }
 
-    private void Attack() {
-        GameObject ins = Instantiate(bullet);
+    private void Shoot() {
+        GameObject ins = Instantiate(Bullet);
         ins.transform.position = transform.position;
         ins.transform.rotation = transform.rotation;
     }
 
-    private void LookAtTarget() {
+    public void LookAt(Transform target) {
         float x = target.transform.position.x - transform.position.x;
         x = (x < 0) ? -x : x;
         float y = target.transform.position.y - transform.position.y;
@@ -91,7 +106,7 @@ public class Tower : MonoBehaviour {
     private void OnDrawGizmos() {
         if (showRange) {
             Gizmos.color = TransparentWhite;
-            Gizmos.DrawSphere(transform.position, range);
+            Gizmos.DrawSphere(transform.position, Range);
         }
     }
 #endif
