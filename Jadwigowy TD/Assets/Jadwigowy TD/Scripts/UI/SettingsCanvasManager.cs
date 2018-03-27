@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace UI {
@@ -9,6 +10,9 @@ namespace UI {
         public Canvas canvas;
         public Text pauseText;
         public bool pause = true;
+
+        public Toggle fullscreenToggle;
+        public Slider masterVolumeSlider;
 
         void Awake() {
             if (pauseText) {
@@ -49,9 +53,30 @@ namespace UI {
                 Debug.LogWarning("Canvas is not set.");
         }
 
+        private void Start() {
+            SetSettingsMenu(PlayerSettinsApplyer.LoadSettingsData());
+        }
+
+        public void SetSettingsMenu(SettingsData settings) {
+            fullscreenToggle.isOn = settings.isFullscreen == 1;
+            masterVolumeSlider.value = settings.masterVolume;
+        }
+
         public void SaveSettings() {
-            // TODO: settings saving
-            Debug.Log("\"save\"");
+            var settingsApplyer = FindObjectOfType<PlayerSettinsApplyer>();
+            SettingsData settingsFromMenu = GetSettingsFromMenu();
+            if (settingsApplyer)
+                settingsApplyer.ApplySettings(settingsFromMenu);
+            else
+                Debug.LogWarning("There is PlayerSettinsApplyer in the scene");
+            PlayerSettinsApplyer.SaveSettingsData(settingsFromMenu);
+        }
+
+        public SettingsData GetSettingsFromMenu() {
+            return new SettingsData() {
+                isFullscreen = (fullscreenToggle.isOn) ? 1 : 0,
+                masterVolume = masterVolumeSlider.value
+            };
         }
     }
 }

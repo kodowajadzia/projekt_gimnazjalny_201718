@@ -306,6 +306,8 @@
     <Compile Include="Assets\Jadwigowy TD\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Enemy\EnemySpawner.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\GameController.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\PlayerSettinsApplyer.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\SettingsData.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\BorderTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\BulletTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\Enemy\EnemySpawnerTest.cs" />
