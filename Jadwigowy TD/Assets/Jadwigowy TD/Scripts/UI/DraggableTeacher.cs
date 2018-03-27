@@ -30,8 +30,9 @@ namespace UI {
             transform.position = startPos;
         }
 
+        // TODO: IsPositionCerrect funcion
         public bool IsPositionCorrect(Vector2 pos) {
-            return true;//TODO IsPositionCerrect funcion
+            return true;
         }
 
         public void PutTower(Vector2 pos) {

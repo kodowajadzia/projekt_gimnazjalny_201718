@@ -36,7 +36,8 @@ public class EnemyTest {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
         enemy.Hit(enemy.GetHealth());
 
-        yield return null;// Destroy() needs 1 frame
+        // Destroy() needs 1 frame
+        yield return null;
 
         Assert.IsFalse(enemy);
 
@@ -68,7 +69,8 @@ public class EnemyTest {
     [UnityTest]
     public IEnumerator DiesAfterAttack() {
         yield return new MonoBehaviourTest<Enemy>();
-        yield return null;// Destroy() needs 1 frame
+        // Destroy() needs 1 frame
+        yield return null;
 
         Assert.IsFalse(GameObject.FindObjectOfType<Enemy>());
     }

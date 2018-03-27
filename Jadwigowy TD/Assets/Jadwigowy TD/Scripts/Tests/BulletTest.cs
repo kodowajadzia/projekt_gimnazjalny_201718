@@ -11,7 +11,9 @@ public class BulletTest {
 	public IEnumerator Moves() {
         bullet = new GameObject("Bullet");
         bullet.AddComponent<Bullet>();
-		yield return null;
+
+        yield return null;
+
         Assert.Greater(bullet.transform.position.x, 0);
 	}
 

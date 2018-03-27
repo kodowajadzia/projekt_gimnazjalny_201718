@@ -16,8 +16,9 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
 
 #if UNITY_EDITOR
     [SerializeField] private bool showPath = true;
-    public bool IsTestFinished { get; private set; }
 #endif
+
+    public bool IsTestFinished { get; private set; }
 
     private void Awake() {
         // There must be a starting signpost with a "Start Signpost" tag.
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
 
     private void Update() {
         if (targetSignpost != null) {
-            RotateTo(targetSignpost.transform);
+            LookAt(targetSignpost.transform);
             MoveForward();
 
             if (targetSignpost.SingpostType == Signpost.Type.End)
@@ -47,10 +48,31 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
             Attack();
     }
 
-    private void RotateTo(Transform target) {
-        Vector3 relativePos = target.transform.position - transform.position;
-        Quaternion rot = Quaternion.LookRotation(relativePos);
-        rot *= Quaternion.Euler(0, 90, 0) * Quaternion.Euler(0, 180, 0);
+    public void LookAt(Transform target) {
+        float x = target.transform.position.x - transform.position.x;
+        x = (x < 0) ? -x : x;
+        float y = target.transform.position.y - transform.position.y;
+        y = (y < 0) ? -y : y;
+
+        float angleZ = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+
+        if (target.transform.position.x > transform.position.x && target.transform.position.y > transform.position.y)
+            angleZ = angleZ;
+        else if (target.transform.position.x < transform.position.x && target.transform.position.y > transform.position.y)
+            angleZ = 180 - angleZ;
+        else if (target.transform.position.x < transform.position.x && target.transform.position.y < transform.position.y)
+            angleZ = 180 + angleZ;
+        else if (target.transform.position.x > transform.position.x && target.transform.position.y < transform.position.y)
+            angleZ = 360 - angleZ;
+
+        float angleY;
+
+        if (target.transform.position.x > transform.position.x)
+            angleY = 0;
+        else
+            angleY = 180;
+
+        Quaternion rot = Quaternion.Euler(0, 0, angleZ) * Quaternion.Euler(angleY, 0, 0);
         transform.rotation = rot;
     }
 
@@ -67,7 +89,7 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
     }
 #endif
 
-    // TODO rename this method with a better name
+    // TODO: rename this method with a better name
     private void Attack() {
         FindObjectOfType<GameController>().Pass();
         Die();

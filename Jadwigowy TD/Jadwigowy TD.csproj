@@ -315,11 +315,15 @@
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\UI\Buttons\BackToMainMenuButtonTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\UI\Buttons\StartEndlessModeButtonTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\UI\DraggableTeacherTest.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\Tests\UI\SettingsCanvasManagerTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Bullet.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Tower.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\BackToMainMenuButton.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\ButtonWithShortcut.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\ExitButton.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\StartEndlessModeButton.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\DraggableTeacher.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\SettingsCanvasManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

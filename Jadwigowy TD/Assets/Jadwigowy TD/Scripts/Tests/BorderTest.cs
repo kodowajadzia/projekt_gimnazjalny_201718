@@ -5,7 +5,6 @@ using System.Collections;
 
 public class BorderTest {
 
-
     [UnityTest]
     public IEnumerator BorderDestroysGameObjectWithRigidbodyWhenCollided() {
         var border = new GameObject("Border");

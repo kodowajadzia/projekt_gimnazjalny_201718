@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 
     public const string currency = "BTC";
     public float Money { get; set; }
-    private int score;// TODO score awarding
+    private int score;// TODO: score awarding
 
     [SerializeField] private Canvas gameOverCanvas;
 
@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void Lose() {
-        // TODO ending
+        // TODO: ending
         IsPlaying = false;
         Debug.Log("game over");
         Time.timeScale = 0;
