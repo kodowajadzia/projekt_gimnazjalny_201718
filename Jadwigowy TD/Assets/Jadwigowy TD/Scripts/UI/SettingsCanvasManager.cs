@@ -58,8 +58,14 @@ namespace UI {
         }
 
         public void SetSettingsMenu(SettingsData settings) {
-            fullscreenToggle.isOn = settings.isFullscreen == 1;
-            masterVolumeSlider.value = settings.masterVolume;
+            if (fullscreenToggle)
+                fullscreenToggle.isOn = settings.isFullscreen == 1;
+            else
+                Debug.LogWarning("FullscreenToggle is not set.");
+            if(masterVolumeSlider)
+                masterVolumeSlider.value = settings.masterVolume;
+            else
+                Debug.LogWarning("MasterVolumeSlider is not set.");
         }
 
         public void SaveSettings() {

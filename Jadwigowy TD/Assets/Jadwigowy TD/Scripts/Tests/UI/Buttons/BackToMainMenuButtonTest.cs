@@ -8,7 +8,6 @@ namespace UI {
     public class BackToMainMenuButtonTest {
 
         [UnityTest]
-        [Ignore("SceneManger")]
         public IEnumerator BacksToMenuWhenClicked() {
             var button = new GameObject("Button");
             button.AddComponent<BackToMainMenuButton>().BackToMainMenu();
