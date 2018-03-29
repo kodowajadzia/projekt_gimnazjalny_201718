@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] private float difficultyIncrease = 5f, difficultyRange = 100f;
     [SerializeField] private float spawnCooldownInSeconds = 1f,waveDelayInSeconds = 3f;
     [SerializeField] private GameObject[] enemiesPrefabs = new GameObject[0];
-    [SerializeField] private EnemySpawner spawner;
+    [SerializeField] private Spawner spawner;
     private bool isWaveInProgress, spawned;
 
     public bool AreEnemiesAlive {
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour {
         set { difficultyRange = value; }
     }
 
-    public EnemySpawner Spawner {
+    public Spawner Spawner {
         get { return spawner; }
         set { spawner = value; }
     }

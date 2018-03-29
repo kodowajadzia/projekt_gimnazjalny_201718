@@ -5,56 +5,27 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace UI {
-    public class SettingsCanvasManager : MonoBehaviour {
+    public class SettingsCanvasManager : CanvasManager {
 
-        public Canvas canvas;
         public Text pauseText;
         public bool pause = true;
 
         public Toggle fullscreenToggle;
         public Slider masterVolumeSlider;
 
-        void Awake() {
+        new protected void Awake() {
+            base.Awake();
+
             if (pauseText) {
                 if (pause)
                     pauseText.text = "PAUZA";
                 else
                     pauseText.text = "";
             } else Debug.LogWarning("PauseText is not set.");
-
-            if (canvas)
-                Hide();
-            else
-                Debug.LogWarning("Canvas is not set.");
         }
 
-        public void ChangeState() {
-            if (canvas.enabled)
-                Hide();
-            else
-                Show();
-        }
-
-        public void Show() {
-            if (canvas) {
-                canvas.enabled = true;
-                if (pause)
-                    Time.timeScale = 0;
-            } else
-                Debug.LogWarning("Canvas is not set.");
-        }
-
-        public void Hide() {
-            if (canvas) {
-                canvas.enabled = false;
-                if (pause)
-                    Time.timeScale = 1;
-            } else
-                Debug.LogWarning("Canvas is not set.");
-        }
-
-        private void Start() {
-            SetSettingsMenu(PlayerSettinsApplyer.LoadSettingsData());
+        protected void Start() {
+            SetSettingsMenu(PlayerSettingsApplier.LoadSettingsData());
         }
 
         public void SetSettingsMenu(SettingsData settings) {
@@ -62,25 +33,25 @@ namespace UI {
                 fullscreenToggle.isOn = settings.isFullscreen == 1;
             else
                 Debug.LogWarning("FullscreenToggle is not set.");
-            if(masterVolumeSlider)
+            if (masterVolumeSlider)
                 masterVolumeSlider.value = settings.masterVolume;
             else
                 Debug.LogWarning("MasterVolumeSlider is not set.");
         }
 
         public void SaveSettings() {
-            var settingsApplyer = FindObjectOfType<PlayerSettinsApplyer>();
+            var settingsApplyer = FindObjectOfType<PlayerSettingsApplier>();
             SettingsData settingsFromMenu = GetSettingsFromMenu();
             if (settingsApplyer)
                 settingsApplyer.ApplySettings(settingsFromMenu);
             else
                 Debug.LogWarning("There is PlayerSettinsApplyer in the scene");
-            PlayerSettinsApplyer.SaveSettingsData(settingsFromMenu);
+            PlayerSettingsApplier.SaveSettingsData(settingsFromMenu);
         }
 
         public SettingsData GetSettingsFromMenu() {
             return new SettingsData() {
-                isFullscreen = (fullscreenToggle.isOn) ? 1 : 0,
+                isFullscreen = (fullscreenToggle.isOn) ? (byte)1 : (byte)0,
                 masterVolume = masterVolumeSlider.value
             };
         }

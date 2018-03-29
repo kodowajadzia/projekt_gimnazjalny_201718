@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class PlayerSettinsApplyer : MonoBehaviour {
+public class PlayerSettingsApplier : MonoBehaviour {
 
     public AudioMixer masterMixer;
     public const string MasterVolumeMixerTag = "MasterVolume";
 
-    private const string FullscreenTag = "Fullscreen";
-    private const string MasterVolumeTag = "Master Volume";
+    public const string FullscreenTag = "Fullscreen";
+    public const string MasterVolumeTag = "Master Volume";
 
-    void Start () {
+    public void Start() {
         ApplySettings(LoadSettingsData());
-	}
+    }
+
+    public void ApplySettings(SettingsData settings) {
+        Screen.fullScreen = settings.isFullscreen == 1;
+        if (masterMixer)
+            masterMixer.SetFloat(MasterVolumeMixerTag, settings.masterVolume);
+        else
+            Debug.LogWarning("MasterMixer is not set.");
+    }
 
     public static void SaveSettingsData(SettingsData settings) {
         PlayerPrefs.SetInt(FullscreenTag, settings.isFullscreen);
@@ -22,13 +30,8 @@ public class PlayerSettinsApplyer : MonoBehaviour {
 
     public static SettingsData LoadSettingsData() {
         return new SettingsData() {
-            isFullscreen = PlayerPrefs.GetInt(FullscreenTag, 1),
+            isFullscreen = (byte)PlayerPrefs.GetInt(FullscreenTag, 1),
             masterVolume = PlayerPrefs.GetFloat(MasterVolumeTag, 0f)
         };
-    }
-
-    public void ApplySettings(SettingsData settings) {
-        Screen.fullScreen = settings.isFullscreen == 1;
-        masterMixer.SetFloat(MasterVolumeMixerTag, settings.masterVolume);
     }
 }

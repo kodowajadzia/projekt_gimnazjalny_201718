@@ -1,5 +1,5 @@
 ﻿public struct SettingsData {
-    //isFullscreen is saved as int
-    public int isFullscreen;
+    //isFullscreen is saved as byte
+    public byte isFullscreen;
     public float masterVolume;
 }

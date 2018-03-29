@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
-namespace UI {
+namespace Tests.UI {
     public class StartEndlessModeButtonTest {
 
         [UnityTest]

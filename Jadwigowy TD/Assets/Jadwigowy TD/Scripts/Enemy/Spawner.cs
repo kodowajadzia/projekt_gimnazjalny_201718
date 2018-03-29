@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
+public class Spawner : MonoBehaviour {
 
     public GameObject Spawn(GameObject sample) {
         GameObject ins = Instantiate(sample);

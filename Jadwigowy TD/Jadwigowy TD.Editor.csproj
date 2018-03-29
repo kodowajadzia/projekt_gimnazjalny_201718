@@ -308,7 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\ButtonWithShortcutEditor.cs" />
-    <Compile Include="Assets\Editor\SignpostTest.cs" />
+    <Compile Include="Assets\Editor\Tests\SignpostTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

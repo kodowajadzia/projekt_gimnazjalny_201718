@@ -1,32 +1,33 @@
-﻿using UnityEngine;
+﻿using UI;
+using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 
-namespace UI {
-    public class SettingsCanvasManagerTest {
+namespace Tests.UI {
+    public class CanvasManagerTest {
 
-        private GameObject settingsCanvas;
+        private GameObject canvasGameObject;
         private Canvas canvas;
-        private SettingsCanvasManager settingsCanvasManager;
+        private CanvasManager canvasManager;
 
         [OneTimeSetUp]
         public void SetUp() {
-            settingsCanvas = new GameObject("Settings Canvas");
-            canvas = settingsCanvas.AddComponent<Canvas>();
-            settingsCanvasManager = settingsCanvas.AddComponent<SettingsCanvasManager>();
-            settingsCanvasManager.canvas = canvas;
+            canvasGameObject = new GameObject("Settings Canvas");
+            canvas = canvasGameObject.AddComponent<Canvas>();
+            canvasManager = canvasGameObject.AddComponent<CanvasManager>();
+            canvasManager.canvas = canvas;
         }
 
         [Test]
         public void ShowsCanvas() {
             canvas.enabled = false;
-            settingsCanvasManager.Show();
+            canvasManager.Show();
 
             Assert.IsTrue(canvas.enabled);
 
             canvas.enabled = true;
-            settingsCanvasManager.Show();
+            canvasManager.Show();
 
             Assert.IsTrue(canvas.enabled);
         }
@@ -34,12 +35,12 @@ namespace UI {
         [Test]
         public void HidesCanvas() {
             canvas.enabled = false;
-            settingsCanvasManager.Hide();
+            canvasManager.Hide();
 
             Assert.IsFalse(canvas.enabled);
 
             canvas.enabled = true;
-            settingsCanvasManager.Hide();
+            canvasManager.Hide();
 
             Assert.IsFalse(canvas.enabled);
         }
@@ -47,19 +48,19 @@ namespace UI {
         [Test]
         public void ChangesState() {
             canvas.enabled = false;
-            settingsCanvasManager.ChangeState();
+            canvasManager.ChangeState();
 
             Assert.IsTrue(canvas.enabled);
 
             canvas.enabled = true;
-            settingsCanvasManager.ChangeState();
+            canvasManager.ChangeState();
 
             Assert.IsFalse(canvas.enabled);
         }
 
         [OneTimeTearDown]
         public void TearDown() {
-            GameObject.Destroy(settingsCanvas);
+            GameObject.Destroy(canvasGameObject);
         }
     }
 }
