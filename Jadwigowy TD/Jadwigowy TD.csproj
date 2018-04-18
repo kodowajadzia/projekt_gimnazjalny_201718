@@ -240,6 +240,7 @@
   <ItemGroup>
     <Compile Include="Assets\Jadwigowy TD\Scripts\Attack Path\Signpost.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Border.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\Bulet dmg.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Enemy\Spawner.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\GameController.cs" />
