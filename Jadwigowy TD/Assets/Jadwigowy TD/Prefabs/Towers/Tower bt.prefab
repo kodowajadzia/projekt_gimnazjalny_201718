@@ -82,9 +82,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  dmg: 1
   cooldown: 1
-  bullet: {fileID: 1764865482736304, guid: 0250cf274ef116c45b853dd12bb8c444, type: 2}
+  bullet: {fileID: 1764865482736304, guid: 5589e661affdfdc49b1f5dc2ff14f4b0, type: 2}
   showTarget: 1
   showRange: 1
 --- !u!212 &212184908728094576

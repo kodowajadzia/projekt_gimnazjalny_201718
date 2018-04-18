@@ -113,6 +113,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &3476791 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114027539686963530, guid: 86da122fb43500e449c640dc24f47c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 718594191}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &21573924
 Prefab:
   m_ObjectHideFlags: 0
@@ -391,6 +397,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: ed2941a264e759c4582577f6fbe07ca1,
         type: 3}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: price
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 1727069715}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
   m_IsPrefabParent: 0
@@ -507,6 +523,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 9280a6b9ae8e1dd41b3fa63b4d2c58a2,
         type: 3}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 871719560}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
   m_IsPrefabParent: 0
@@ -1026,6 +1047,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 617774701cee2d5488c5fdea94970829, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &613926602 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114027539686963530, guid: 86da122fb43500e449c640dc24f47c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 1725073401}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &653344621
 Prefab:
   m_ObjectHideFlags: 0
@@ -1259,9 +1286,31 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: fa5ee786825915744ab670d8f72ccb84,
         type: 3}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: price
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 3476791}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &740117272 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114027539686963530, guid: 86da122fb43500e449c640dc24f47c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 1481328483}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &871719560 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114027539686963530, guid: 86da122fb43500e449c640dc24f47c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 159915780}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &876178584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1631,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: b0b7ad0b217691f49841758d67d32598,
         type: 3}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: price
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 2135378752}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
   m_IsPrefabParent: 0
@@ -1613,6 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPasses: 5
+  moneyAtStart: 10
   gameOverCanvas: {fileID: 462766430}
   difficultyIncrease: 5
   difficultyRange: 100
@@ -2111,6 +2171,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 76f64833412034b4b93b547c70e9d1a3,
         type: 3}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: price
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 740117272}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
   m_IsPrefabParent: 0
@@ -2342,9 +2412,25 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 0b5ca47948ae8214d9b6a54c107bde7d,
         type: 3}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: price
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: priceText
+      value: 
+      objectReference: {fileID: 613926602}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1727069715 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114027539686963530, guid: 86da122fb43500e449c640dc24f47c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 117986456}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1758374262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,3 +2700,9 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224724874219321080, guid: 617774701cee2d5488c5fdea94970829,
     type: 2}
   m_PrefabInternal: {fileID: 596304188}
+--- !u!114 &2135378752 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114027539686963530, guid: 86da122fb43500e449c640dc24f47c03,
+    type: 2}
+  m_PrefabInternal: {fileID: 1082184068}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}

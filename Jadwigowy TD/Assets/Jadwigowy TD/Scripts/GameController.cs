@@ -8,7 +8,8 @@ public class GameController : MonoBehaviour {
     [SerializeField] private uint maxPasses = 5;
     public uint Passes { get; private set; }
 
-    public const string currency = "BTC";
+    public const string Currency = "BTC";
+    public float moneyAtStart = 10;
     public float Money { get; set; }
     private int score;// TODO: score awarding
 
@@ -63,6 +64,10 @@ public class GameController : MonoBehaviour {
     }
 
     [SerializeField] private Text moneyText, scoreText;
+
+    private void Awake() {
+        Money = moneyAtStart;
+    }
 
     private void Start() {
         if (gameOverCanvas)
@@ -134,7 +139,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void OnGUI() {
-        if (moneyText) moneyText.text = Money + " " + currency;
+        if (moneyText) moneyText.text = Money + " " + Currency;
         else Debug.LogWarning("Money text is not set.");
         if (scoreText) scoreText.text = score.ToString();
         else Debug.LogWarning("Score text is not set.");

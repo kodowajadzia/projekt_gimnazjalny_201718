@@ -2,32 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI {
     public class DraggableTeacher : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
         [SerializeField] private float price;
+        public Text priceText;
         private Vector2 startPos;
         [SerializeField] private GameObject towerPref;
+        private bool buyed;
+
+        private void Start() {
+            priceText.text = price + GameController.Currency;
+        }
 
         public void OnBeginDrag(PointerEventData eventData) {
             GameController gameController = FindObjectOfType<GameController>();
-            if(price <= gameController.Money) {
+            startPos = transform.position;
+            if (price <= gameController.Money) {
                 gameController.Money -= price;
-                startPos = transform.position;
+                buyed = true;
             }
         }
 
         public void OnDrag(PointerEventData eventData) {
-            transform.position = Input.mousePosition;
+            if (buyed)
+                transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData) {
-            if (IsPositionCorrect(eventData.position)) {
+            if (IsPositionCorrect(eventData.position) && buyed) {
                 Vector2 realPos = Camera.main.ScreenToWorldPoint(eventData.position);
                 PutTower(realPos);
             }
             transform.position = startPos;
+            buyed = false;
         }
 
         // TODO: IsPositionCerrect funcion
