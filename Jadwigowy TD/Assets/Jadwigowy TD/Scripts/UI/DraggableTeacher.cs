@@ -20,8 +20,8 @@ namespace UI {
         public void OnBeginDrag(PointerEventData eventData) {
             GameController gameController = FindObjectOfType<GameController>();
             startPos = transform.position;
-            if (price <= gameController.Money) {
-                gameController.Money -= price;
+            if (price <= gameController.money) {
+                gameController.money -= price;
                 buyed = true;
             }
         }

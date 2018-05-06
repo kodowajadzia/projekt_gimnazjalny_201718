@@ -21,17 +21,17 @@ namespace Tests {
         [UnityTest]
         public IEnumerator SpawnsWaves() {
             GameController gameController = new GameObject("Game Controller").AddComponent<GameController>();
-            gameController.DifficultyIncrease = 5f;
-            gameController.DifficultyRange = 9f;
-            gameController.WaveDelayInSeconds = 0.1f;
-            gameController.SpawnCooldownInSeconds = 0.1f;
-            gameController.Spawner = new GameObject("Spawner").AddComponent<Spawner>();
+            gameController.difficultyIncrease = 5f;
+            gameController.difficultyRange = 9f;
+            gameController.waveDelayInSeconds = 0.1f;
+            gameController.spawnCooldownInSeconds = 0.1f;
+            gameController.spawner = new GameObject("Spawner").AddComponent<Spawner>();
             var enemy0 = new GameObject("Enemy0") { tag = Enemy.Tag };
             var enemy1 = new GameObject("Enmye1") { tag = Enemy.Tag };
-            gameController.EnemiesPrefabs = new GameObject[] { enemy0, enemy1 };
+            gameController.enemiesPrefabs = new GameObject[] { enemy0, enemy1 };
 
             yield return new WaitForSeconds(0.1f);
-            yield return new WaitForSeconds(gameController.WaveDelayInSeconds + (gameController.SpawnCooldownInSeconds * 5f));
+            yield return new WaitForSeconds(gameController.waveDelayInSeconds + (gameController.spawnCooldownInSeconds * 5f));
 
             GameObject[] spawnedEnemies;
             spawnedEnemies = GameObject.FindGameObjectsWithTag(Enemy.Tag);
@@ -45,7 +45,7 @@ namespace Tests {
             }
 
             yield return new WaitForSeconds(0.1f);
-            yield return new WaitForSeconds(gameController.WaveDelayInSeconds + (gameController.SpawnCooldownInSeconds * 10f));
+            yield return new WaitForSeconds(gameController.waveDelayInSeconds + (gameController.spawnCooldownInSeconds * 10f));
 
             spawnedEnemies = GameObject.FindGameObjectsWithTag(Enemy.Tag);
             Assert.AreEqual(12 /* 2 already created and 10 spawned */, spawnedEnemies.Length);
@@ -65,14 +65,14 @@ namespace Tests {
         [UnityTest]
         public IEnumerator EndsGameAfterTooManyPasses() {
             GameController gameController = new GameObject("Game Controller").AddComponent<GameController>();
-            gameController.MaxPasses = 1;
+            gameController.maxPasses = 1;
             Signpost endSignpost = new GameObject("End Signpost") { tag = Signpost.StartSignpostTag }.AddComponent<Signpost>();
             Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
 
             yield return null;
             yield return null;
 
-            Assert.IsFalse(gameController.IsPlaying);
+            Assert.IsFalse(gameController.isPlaying);
 
             GameObject.Destroy(gameController);
             GameObject.Destroy(endSignpost);

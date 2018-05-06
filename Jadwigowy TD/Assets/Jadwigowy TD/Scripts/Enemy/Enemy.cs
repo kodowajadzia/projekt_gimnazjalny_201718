@@ -6,11 +6,12 @@ using UnityEngine.TestTools;
 public class Enemy : MonoBehaviour, IMonoBehaviourTest {
 
     private Signpost targetSignpost;
-    [SerializeField]
-    private float
+    public float
         speed = 1,
         minDistance = 0.1f,
-        health = 10;
+        health = 10,
+        costPerKill = 10f;
+    public int scorePerKill = 1;
     private bool passed;
     public const string Tag = "Enemy";
 
@@ -98,8 +99,12 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
 
     public void Hit(float dmg) {
         health -= dmg;
-        if (health <= 0)
+        if (health <= 0) {
+            GameController gc = FindObjectOfType<GameController>();
+            gc.IncreaseScore(scorePerKill);
+            gc.IncreaseMoney(costPerKill);
             Die();
+        }
     }
 
     private void Die() {
