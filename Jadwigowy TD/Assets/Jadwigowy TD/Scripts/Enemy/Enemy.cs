@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
     }
 
     private void Die() {
+        gameObject.SetActive(false);
         Destroy(gameObject);
     }
 

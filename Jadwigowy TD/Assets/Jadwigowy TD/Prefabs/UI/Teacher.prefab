@@ -172,6 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 0
+  priceText: {fileID: 114027539686963530}
+  image: {fileID: 114085041582962344}
   towerPref: {fileID: 0}
 --- !u!114 &114211534597847360
 MonoBehaviour:

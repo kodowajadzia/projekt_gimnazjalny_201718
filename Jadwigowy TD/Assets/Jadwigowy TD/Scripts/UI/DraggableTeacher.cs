@@ -9,19 +9,24 @@ namespace UI {
 
         [SerializeField] private float price;
         public Text priceText;
+        public Image image;
         private Vector2 startPos;
         [SerializeField] private GameObject towerPref;
         private bool buyed;
+        private GameController gc;
+
+        private void Awake() {
+            gc = FindObjectOfType<GameController>();
+        }
 
         private void Start() {
-            priceText.text = price + GameController.Currency;
+            priceText.text = price + " " + GameController.Currency;
         }
 
         public void OnBeginDrag(PointerEventData eventData) {
-            GameController gameController = FindObjectOfType<GameController>();
             startPos = transform.position;
-            if (price <= gameController.money) {
-                gameController.money -= price;
+            if (price <= gc.money) {
+                gc.money -= price;
                 buyed = true;
             }
         }
@@ -48,6 +53,13 @@ namespace UI {
         public void PutTower(Vector2 pos) {
             GameObject ins = Instantiate(towerPref);
             ins.transform.position = pos;
+        }
+
+        private void OnGUI() {
+            if(gc.money >= price)
+                image.color = Color.white;
+            else
+                image.color = Color.gray;
         }
     }
 }

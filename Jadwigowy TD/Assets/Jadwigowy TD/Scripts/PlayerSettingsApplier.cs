@@ -30,7 +30,7 @@ public class PlayerSettingsApplier : MonoBehaviour {
 
     public static SettingsData LoadSettingsData() {
         return new SettingsData() {
-            isFullscreen = (byte)PlayerPrefs.GetInt(FullscreenTag, 1),
+            isFullscreen = (byte)PlayerPrefs.GetInt(FullscreenTag, 0),
             masterVolume = PlayerPrefs.GetFloat(MasterVolumeTag, 0f)
         };
     }

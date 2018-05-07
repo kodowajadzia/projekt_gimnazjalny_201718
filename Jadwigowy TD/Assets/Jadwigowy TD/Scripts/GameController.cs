@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
     public uint maxPasses = 5;
     public uint Passes { get; private set; }
 
-    public const string Currency = "BTC";
+    public const string Currency = "bitcoin";
     public float moneyAtStart = 10;
     public float money;
     private int score;
@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
     public Spawner spawner;
     private bool isWaveInProgress, spawned;
     public bool isPlaying;
-    public Text moneyText, scoreText;
+    public Text moneyText, scoreText, livesText;
 
     public bool AreEnemiesAlive {
         get { return FindObjectsOfType<Enemy>().Length > 0; }
@@ -108,6 +108,12 @@ public class GameController : MonoBehaviour {
         else Debug.LogWarning("Money text is not set.");
         if (scoreText) scoreText.text = score.ToString();
         else Debug.LogWarning("Score text is not set.");
+
+        string livesString = "";
+        for(int i = 0; i<maxPasses - Passes; i++) {
+            livesString += "<3";
+        }
+        livesText.text = livesString;
     }
 
     public void IncreaseScore(int increase) {
