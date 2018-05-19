@@ -800,10 +800,10 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "PE\u0141NY EKRAN"
+  m_Text: "PE\u0141NY EKRAN (zbugowane(nie dotyka\u0107))"
 --- !u!114 &114559006396996322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 223652603449811460}
   pauseText: {fileID: 114318743130164134}
-  pause: 1
+  pause: 0
   fullscreenToggle: {fileID: 114559006396996322}
   masterVolumeSlider: {fileID: 114234927707325676}
 --- !u!114 &114780579898974116
@@ -1701,7 +1701,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224617290730927450
 RectTransform:
   m_ObjectHideFlags: 1

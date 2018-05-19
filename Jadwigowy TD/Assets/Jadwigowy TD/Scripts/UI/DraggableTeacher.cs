@@ -12,11 +12,16 @@ namespace UI {
         public Image image;
         private Vector2 startPos;
         [SerializeField] private GameObject towerPref;
-        private bool buyed;
         private GameController gc;
+        public Color cannotAfforColor = Color.black;
+        public RectTransform panel;
+        public float towersPadding = 1f;
+        public AudioClip buySound, cancelSound;
+        private AudioSource audioSource;
 
         private void Awake() {
             gc = FindObjectOfType<GameController>();
+            audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
         }
 
         private void Start() {
@@ -25,29 +30,38 @@ namespace UI {
 
         public void OnBeginDrag(PointerEventData eventData) {
             startPos = transform.position;
-            if (price <= gc.money) {
-                gc.money -= price;
-                buyed = true;
-            }
         }
 
         public void OnDrag(PointerEventData eventData) {
-            if (buyed)
+            if (IsBuyalbe())
                 transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData) {
-            if (IsPositionCorrect(eventData.position) && buyed) {
+            if (IsPositionCorrect(eventData.position) && IsBuyalbe()) {
+                gc.money -= price;
+                audioSource.PlayOneShot(buySound);
                 Vector2 realPos = Camera.main.ScreenToWorldPoint(eventData.position);
                 PutTower(realPos);
             }
             transform.position = startPos;
-            buyed = false;
         }
 
-        // TODO: IsPositionCerrect funcion
         public bool IsPositionCorrect(Vector2 pos) {
-            return true;
+            Vector2 realPos = Camera.main.ScreenToWorldPoint(pos);
+
+            GameObject[] teachers = GameObject.FindGameObjectsWithTag("Teacher");
+            bool isOnAnotherTeacher = false;
+            foreach(GameObject teacher in teachers) {
+                if (Vector2.Distance(realPos, teacher.transform.position) < towersPadding) {
+                    isOnAnotherTeacher = true;
+                    audioSource.PlayOneShot(cancelSound);
+                }
+            }
+
+            bool isInPanel = panel.rect.Contains(pos);
+
+            return !isInPanel && !isOnAnotherTeacher;
         }
 
         public void PutTower(Vector2 pos) {
@@ -59,7 +73,11 @@ namespace UI {
             if(gc.money >= price)
                 image.color = Color.white;
             else
-                image.color = Color.gray;
+                image.color = cannotAfforColor;
+        }
+
+        public bool IsBuyalbe() {
+            return price <= gc.money;
         }
     }
 }

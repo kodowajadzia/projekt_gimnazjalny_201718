@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4186531159184540}
   - component: {fileID: 212805025517633096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 61868562433303074}
   - component: {fileID: 50580641476988194}
   - component: {fileID: 114447194150239272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet Dobek
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fec5de9203a4f248803773d03c24b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  dmg: 5
+  speed: 5
+  dmg: 4
 --- !u!212 &212805025517633096
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -143,6 +143,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

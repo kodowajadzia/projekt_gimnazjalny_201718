@@ -25,7 +25,7 @@ namespace Tests {
             Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
             float healthAtStart = enemy.GetHealth();
 
-            enemy.Hit(healthAtStart / 2);
+            enemy.Hit(healthAtStart / 2, 0);
 
             Assert.AreEqual(enemy.GetHealth(), healthAtStart / 2);
 
@@ -35,7 +35,7 @@ namespace Tests {
         [UnityTest]
         public IEnumerator DiesWhenHealthIsZero() {
             Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
-            enemy.Hit(enemy.GetHealth());
+            enemy.Hit(enemy.GetHealth(), 0);
 
             // Destroy() needs 1 frame
             yield return null;

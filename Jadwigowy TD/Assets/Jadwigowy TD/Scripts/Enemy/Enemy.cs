@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.TestTools;
 
 public class Enemy : MonoBehaviour, IMonoBehaviourTest {
@@ -12,8 +13,15 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
         health = 10,
         costPerKill = 10f;
     public int scorePerKill = 1;
+    public Color hitColor = Color.red;
+    public float hitColorDuration = 0.1f;
     private bool passed;
     public const string Tag = "Enemy";
+    private HealthBar healthBar;
+    private float maxHealth;
+    public AudioClip deathSound;
+    private AudioSource audioSource;
+    private float stuned;
 
 #if UNITY_EDITOR
     [SerializeField] private bool showPath = true;
@@ -28,25 +36,33 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
             targetSignpost = startSignpost.GetComponent<Signpost>();
         else
             Debug.LogWarning("There is no starting signpost.");
+
+        healthBar = GetComponent<HealthBar>();
+        maxHealth = health;
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
     private void Update() {
-        if (targetSignpost != null) {
-            LookAt(targetSignpost.transform);
-            MoveForward();
+        if (stuned <= 0) {
+            if (targetSignpost != null) {
+                LookAt(targetSignpost.transform);
+                MoveForward();
 
-            if (targetSignpost.SingpostType == Signpost.Type.End)
-                passed = Vector2.Distance(transform.position, targetSignpost.transform.position) < minDistance;
+                if (targetSignpost.SingpostType == Signpost.Type.End)
+                    passed = Vector2.Distance(transform.position, targetSignpost.transform.position) < minDistance;
 
-            if (Vector2.Distance(transform.position, targetSignpost.transform.position) < minDistance)
-                targetSignpost = targetSignpost.NextSignpost;
+                if (Vector2.Distance(transform.position, targetSignpost.transform.position) < minDistance)
+                    targetSignpost = targetSignpost.NextSignpost;
 
 #if UNITY_EDITOR
-            if (showPath)
-                ShowPath();
+                if (showPath)
+                    ShowPath();
 #endif
-        } else if (passed)
-            Attack();
+            } else if (passed)
+                Pass();
+        } else {
+            stuned -= Time.deltaTime;
+        }
     }
 
     public void LookAt(Transform target) {
@@ -90,21 +106,34 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
     }
 #endif
 
-    // TODO: rename this method with a better name
-    private void Attack() {
+    private void Pass() {
         FindObjectOfType<GameController>().Pass();
+        FindObjectOfType<PassEffect>().StartEffect();
         Die();
         IsTestFinished = true;
     }
 
-    public void Hit(float dmg) {
+    public void Hit(float dmg, float stun) {
+        stuned = stun;
         health -= dmg;
+        healthBar.SetHealth(health, maxHealth);
         if (health <= 0) {
             GameController gc = FindObjectOfType<GameController>();
             gc.IncreaseScore(scorePerKill);
             gc.IncreaseMoney(costPerKill);
             Die();
+            audioSource.PlayOneShot(deathSound);
+        } else {
+            StartCoroutine(HitAnimation());
         }
+    }
+
+    private IEnumerator HitAnimation() {
+        SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
+        Color normalColor = sprite.color;
+        sprite.color = hitColor;
+        yield return new WaitForSeconds(hitColorDuration);
+        sprite.color = normalColor;
     }
 
     private void Die() {

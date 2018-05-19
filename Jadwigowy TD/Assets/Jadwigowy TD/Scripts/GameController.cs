@@ -22,7 +22,11 @@ public class GameController : MonoBehaviour {
     public Spawner spawner;
     private bool isWaveInProgress, spawned;
     public bool isPlaying;
-    public Text moneyText, scoreText, livesText;
+    public Text moneyText, scoreText, livesText, wavesText;
+    private int wave = 1;
+
+    public AudioClip passSound, loseSound, startWaveSound;
+    private AudioSource audioSource;
 
     public bool AreEnemiesAlive {
         get { return FindObjectsOfType<Enemy>().Length > 0; }
@@ -30,6 +34,7 @@ public class GameController : MonoBehaviour {
 
     private void Awake() {
         money = moneyAtStart;
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
     }
 
     private void Start() {
@@ -48,7 +53,9 @@ public class GameController : MonoBehaviour {
     }
 
     public IEnumerator SpawnWave(int enemies, GameObject enemyPrefab) {
+        audioSource.PlayOneShot(startWaveSound);
         isWaveInProgress = true;
+        wave++;
         spawned = false;
 
         for (int i = 0; i < enemies; i++) {
@@ -63,12 +70,16 @@ public class GameController : MonoBehaviour {
         if (isPlaying) {
             if (!isWaveInProgress) {
                 difficultyLevel += difficultyIncrease;
+
                 GameObject enemyPrefab = enemiesPrefabs[enemiesPrefabs.Length - 1];
 
+                bool choosed = false;
                 int i = 1;
-                while (i <= enemiesPrefabs.Length && enemyPrefab == null) {
-                    if (difficultyLevel <= i * difficultyRange)
+                while (i <= enemiesPrefabs.Length && !choosed) {
+                    if (difficultyLevel <= i * difficultyRange) {
                         enemyPrefab = enemiesPrefabs[i - 1];
+                        choosed = true;
+                    }
                     i++;
                 }
 
@@ -82,9 +93,12 @@ public class GameController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4))
             IncreaseScore(1);
+        if (Input.GetKey(KeyCode.RightControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4))
+            money += 1;
     }
 
     public void Pass() {
+        audioSource.PlayOneShot(passSound);
         Passes++;
         if (Passes >= maxPasses)
             Lose();
@@ -92,6 +106,7 @@ public class GameController : MonoBehaviour {
 
     public void Lose() {
         // TODO: ending
+        audioSource.PlayOneShot(loseSound);
         isPlaying = false;
         Debug.Log("game over");
         Time.timeScale = 0;
@@ -108,6 +123,7 @@ public class GameController : MonoBehaviour {
         else Debug.LogWarning("Money text is not set.");
         if (scoreText) scoreText.text = score.ToString();
         else Debug.LogWarning("Score text is not set.");
+        wavesText.text = "LEKCJA: " + wave;
 
         string livesString = "";
         for(int i = 0; i<maxPasses - Passes; i++) {

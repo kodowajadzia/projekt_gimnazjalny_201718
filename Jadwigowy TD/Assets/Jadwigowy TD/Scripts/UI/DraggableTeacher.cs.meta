@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: 2f20c242e4e19cd4e8c9b8882401a40e
-timeCreated: 1521061504
-licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - priceText: {instanceID: 0}
+  - image: {instanceID: 0}
+  - towerPref: {instanceID: 0}
+  - panel: {instanceID: 0}
+  - buySound: {fileID: 8300000, guid: d8f383a93cf6f344ba8bb83d6eeed8b6, type: 3}
+  - cancelSound: {fileID: 8300000, guid: 8bcd7a68e9aea07428aef297629c4885, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

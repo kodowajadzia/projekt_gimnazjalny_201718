@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
+    public GameObject circle;
     [SerializeField] private float range = 3, cooldown = 1;
     private float timer;
     private Enemy target;
     [SerializeField] private GameObject bullet;
+    public AudioClip shotSound;
+    private AudioSource audioSource;
 
     public float Range {
         get { return range; }
@@ -27,6 +30,10 @@ public class Tower : MonoBehaviour {
 #if UNITY_EDITOR
     [SerializeField] private bool showTarget = true, showRange = true;
 #endif
+
+    private void Awake() {
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
+    }
 
     void Update() {
         if (target == null || IsOutOfRange(target.transform.position))
@@ -67,6 +74,7 @@ public class Tower : MonoBehaviour {
     }
 
     private void Shoot() {
+        audioSource.PlayOneShot(shotSound);
         GameObject ins = Instantiate(Bullet);
         ins.transform.position = transform.position;
         ins.transform.rotation = transform.rotation;
@@ -98,6 +106,18 @@ public class Tower : MonoBehaviour {
 
         Quaternion rot = Quaternion.Euler(0, 0, angleZ) * Quaternion.Euler(angleY, 0, 0);
         transform.rotation = rot;
+    }
+
+    private GameObject circleIns;
+    private void OnMouseEnter() {
+        circleIns = Instantiate(circle);
+        circleIns.transform.position = transform.position;
+        circleIns.transform.localScale = new Vector3(range, range, range);
+    }
+
+    private void OnMouseExit() {
+        if (circleIns)
+            Destroy(circleIns);
     }
 
 #if UNITY_EDITOR

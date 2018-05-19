@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    [SerializeField] private float speed = 3, dmg = 1;
+    [SerializeField] private float speed = 3, dmg = 1, stun = 0;
 
     private void Update() {
         Move();
@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null) {
-            enemy.Hit(dmg);
+            enemy.Hit(dmg, stun);
             Destroy(gameObject);
         }
     }
