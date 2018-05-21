@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
+    public static readonly string Tag = "Teacher";
+
     public GameObject circle;
     [SerializeField] private float range = 3, cooldown = 1;
     private float timer;
@@ -116,6 +118,11 @@ public class Tower : MonoBehaviour {
     }
 
     private void OnMouseExit() {
+        if (circleIns)
+            Destroy(circleIns);
+    }
+
+    private void OnDestroy() {
         if (circleIns)
             Destroy(circleIns);
     }

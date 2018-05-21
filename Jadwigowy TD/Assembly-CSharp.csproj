@@ -70,6 +70,8 @@
     <Compile Include="Assets\Jadwigowy TD\Scripts\PlayerSettingsApplier.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\SettingsData.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Bullet.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Cart.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\SellOnClick.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\Tower\Tower.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\BackToMainMenuButton.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\ButtonWithShortcut.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\CanvasManager.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\DraggableTeacher.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\SettingsCanvasManager.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\TextsCanvas.cs" />
     <Compile Include="Assets\Jadwigowy TD\Tests\BorderTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Tests\BulletTest.cs" />
     <Compile Include="Assets\Jadwigowy TD\Tests\Enemy\EnemyTest.cs" />

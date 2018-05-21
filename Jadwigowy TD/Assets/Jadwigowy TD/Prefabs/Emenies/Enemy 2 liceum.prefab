@@ -229,7 +229,7 @@ MonoBehaviour:
   speed: 1
   minDistance: 0.1
   health: 12
-  costPerKill: 1
+  costPerKill: 2
   scorePerKill: 1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.1

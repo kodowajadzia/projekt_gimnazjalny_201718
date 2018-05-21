@@ -13,19 +13,22 @@ public class GameController : MonoBehaviour {
     public float money;
     private int score;
 
-    public Canvas gameOverCanvas;
+    public Canvas winCanvas, loseCavnas, resetCanvas;
+    public float resetCanvasDuration = 1f;
 
     private float difficultyLevel;
     public float difficultyIncrease = 5f, difficultyRange = 100f;
     public float spawnCooldownInSeconds = 1f, waveDelayInSeconds = 3f;
     public GameObject[] enemiesPrefabs = new GameObject[0];
+    public GameObject boss;
+    public int wavesToWin = 35, wavesToResetTowers = 10;
     public Spawner spawner;
     private bool isWaveInProgress, spawned;
     public bool isPlaying;
     public Text moneyText, scoreText, livesText, wavesText;
     private int wave = 1;
 
-    public AudioClip passSound, loseSound, startWaveSound;
+    public AudioClip passSound, loseSound, winSound, startWaveSound;
     private AudioSource audioSource;
 
     public bool AreEnemiesAlive {
@@ -38,8 +41,8 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
-        if (gameOverCanvas)
-            gameOverCanvas.enabled = false;
+        if (loseCavnas)
+            loseCavnas.enabled = false;
         else
             Debug.LogWarning("Game-over-canvas is not set.");
         isPlaying = true;
@@ -54,7 +57,6 @@ public class GameController : MonoBehaviour {
 
     public IEnumerator SpawnWave(int enemies, GameObject enemyPrefab) {
         audioSource.PlayOneShot(startWaveSound);
-        isWaveInProgress = true;
         wave++;
         spawned = false;
 
@@ -66,27 +68,53 @@ public class GameController : MonoBehaviour {
         spawned = true;
     }
 
+    public IEnumerator SpawnBossWithDelay(float delayInSeconds) {
+        spawned = false;
+        wave++;
+        yield return new WaitForSeconds(delayInSeconds);
+        SpawnBoss();
+    }
+
+    public void SpawnBoss() {
+        spawned = false;
+        spawner.Spawn(boss);
+        spawned = true;
+    }
+
     private void Update() {
         if (isPlaying) {
             if (!isWaveInProgress) {
-                difficultyLevel += difficultyIncrease;
+                if (wave % wavesToResetTowers == 0)
+                    DestroyAllTowers();
 
-                GameObject enemyPrefab = enemiesPrefabs[enemiesPrefabs.Length - 1];
-
-                bool choosed = false;
-                int i = 1;
-                while (i <= enemiesPrefabs.Length && !choosed) {
-                    if (difficultyLevel <= i * difficultyRange) {
-                        enemyPrefab = enemiesPrefabs[i - 1];
-                        choosed = true;
-                    }
-                    i++;
+                if (wave == wavesToWin) {
+                    Win();
                 }
+                //Debug.Log(wave + " " + wavesToWin);
+                if (wave == wavesToWin-1) {
+                    isWaveInProgress = true;
+                    StartCoroutine(SpawnBossWithDelay(waveDelayInSeconds));
+                } else {
+                    isWaveInProgress = true;
+                    difficultyLevel += difficultyIncrease;
 
-                StartCoroutine(SpawnWaveWithDelay(
-                    enemies: (int)difficultyLevel,
-                    enemyPrefab: enemyPrefab,
-                    delayInSeconds: waveDelayInSeconds));
+                    GameObject enemyPrefab = enemiesPrefabs[enemiesPrefabs.Length - 1];
+
+                    bool choosed = false;
+                    int i = 1;
+                    while (i <= enemiesPrefabs.Length && !choosed) {
+                        if (difficultyLevel <= i * difficultyRange) {
+                            enemyPrefab = enemiesPrefabs[i - 1];
+                            choosed = true;
+                        }
+                        i++;
+                    }
+
+                    StartCoroutine(SpawnWaveWithDelay(
+                        enemies: (int)difficultyLevel,
+                        enemyPrefab: enemyPrefab,
+                        delayInSeconds: waveDelayInSeconds));
+                }
             }
             if (isWaveInProgress && spawned && !AreEnemiesAlive)
                 isWaveInProgress = false;
@@ -95,6 +123,28 @@ public class GameController : MonoBehaviour {
             IncreaseScore(1);
         if (Input.GetKey(KeyCode.RightControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4))
             money += 1;
+        if (Input.GetKeyDown(KeyCode.M))
+            wave = 32;
+    }
+
+    public void DestroyAllTowers() {
+        StartCoroutine(ShowResetCanvas());
+        GameObject[] towers = GameObject.FindGameObjectsWithTag(Tower.Tag);
+        foreach (GameObject tower in towers) {
+            Destroy(tower);
+        }
+    }
+
+    public IEnumerator ShowResetCanvas() {
+        resetCanvas.enabled = true;
+        yield return new WaitForSeconds(resetCanvasDuration);
+        resetCanvas.enabled = false;
+    }
+
+    public void Win() {
+        audioSource.PlayOneShot(winSound);
+        winCanvas.enabled = true;
+        EndGame();
     }
 
     public void Pass() {
@@ -105,13 +155,15 @@ public class GameController : MonoBehaviour {
     }
 
     public void Lose() {
-        // TODO: ending
         audioSource.PlayOneShot(loseSound);
-        isPlaying = false;
-        Debug.Log("game over");
-        Time.timeScale = 0;
-        if (gameOverCanvas) gameOverCanvas.enabled = true;
+        if (loseCavnas) loseCavnas.enabled = true;
         else Debug.LogWarning("Game-over-canvas is not set.");
+        EndGame();
+    }
+
+    public void EndGame() {
+        isPlaying = false;
+        Time.timeScale = 0;
     }
 
     private void OnDestroy() {
@@ -126,7 +178,7 @@ public class GameController : MonoBehaviour {
         wavesText.text = "LEKCJA: " + wave;
 
         string livesString = "";
-        for(int i = 0; i<maxPasses - Passes; i++) {
+        for (int i = 0; i < maxPasses - Passes; i++) {
             livesString += "<3";
         }
         livesText.text = livesString;

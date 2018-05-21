@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
     public AudioClip deathSound;
     private AudioSource audioSource;
     private float stuned;
+    public bool isBoss;
 
 #if UNITY_EDITOR
     [SerializeField] private bool showPath = true;
@@ -107,7 +108,15 @@ public class Enemy : MonoBehaviour, IMonoBehaviourTest {
 #endif
 
     private void Pass() {
-        FindObjectOfType<GameController>().Pass();
+        GameController gc = FindObjectOfType<GameController>();
+        if (!isBoss) {
+            gc.Pass();
+        } else {
+            uint lives = gc.maxPasses - gc.Passes;
+            for(int i = 0; i<lives; i++) {
+                gc.Pass();
+            }
+        }
         FindObjectOfType<PassEffect>().StartEffect();
         Die();
         IsTestFinished = true;
