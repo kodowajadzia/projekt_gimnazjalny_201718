@@ -110,9 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circle: {fileID: 1101474073950732, guid: b17932e6c8e32ea4d8e4405659b1c0ea, type: 2}
   range: 1
-  cooldown: 1
+  cooldown: 0.1
   bullet: {fileID: 1764865482736304, guid: 5589e661affdfdc49b1f5dc2ff14f4b0, type: 2}
   shotSound: {fileID: 8300000, guid: 04df6fdd69ab15d42ab2251ce0e15d3b, type: 3}
+  maxInstances: -1
   showTarget: 1
   showRange: 1
 --- !u!114 &114830169631653890

@@ -125,6 +125,8 @@ MonoBehaviour:
   range: 0.5
   cooldown: 3
   maxCaretakers: 3
+  onlyOne: 1
+  cannotPutReveune: 120
 --- !u!212 &212605273235924012
 SpriteRenderer:
   m_ObjectHideFlags: 1

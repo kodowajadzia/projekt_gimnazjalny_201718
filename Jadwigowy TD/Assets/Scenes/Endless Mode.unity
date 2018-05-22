@@ -202,11 +202,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.88
+      value: -0.077
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.18
+      value: -1.342
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -982,11 +982,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.88
+      value: -4.381
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: -0.287
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1106,7 +1106,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Teraz spr\xF3buj ogarn\u0105\u0107 gdzie p\xF3jd\u0105 (ca\u0142e szcze\u015Bcie
-    mapa kamila jest bardzo przejrzysta)"
+    mapa tofila jest bardzo przejrzysta)"
 --- !u!222 &328321978
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1504,11 +1504,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4428789489419842, guid: de08b69bb753bab4c951209250d9b876, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.61
+      value: -4.27
       objectReference: {fileID: 0}
     - target: {fileID: 4428789489419842, guid: de08b69bb753bab4c951209250d9b876, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.73
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4428789489419842, guid: de08b69bb753bab4c951209250d9b876, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2061,11 +2061,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.45
+      value: 1.958
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.85
+      value: 4.092
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2444,7 +2444,9 @@ Prefab:
     - target: {fileID: 114428163942760470, guid: 86da122fb43500e449c640dc24f47c03,
         type: 2}
       propertyPath: m_Text
-      value: Pani Jola
+      value: 'Pani Jola
+
+        max 1'
       objectReference: {fileID: 0}
     - target: {fileID: 114119504302072108, guid: 86da122fb43500e449c640dc24f47c03,
         type: 2}
@@ -2455,6 +2457,11 @@ Prefab:
         type: 2}
       propertyPath: towersPadding
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224030343693140494, guid: 86da122fb43500e449c640dc24f47c03,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 62.37
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86da122fb43500e449c640dc24f47c03, type: 2}
@@ -2677,7 +2684,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1189814962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 223740588}
@@ -2971,11 +2978,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.73
+      value: 1.135
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.34
+      value: 3.424
       objectReference: {fileID: 0}
     - target: {fileID: 4916280571489210, guid: 8aedbbb25a6b60544b76cad5accbd92c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3161,7 +3168,7 @@ SpriteRenderer:
   m_SortingLayerID: -78717303
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8eff1d1f8a4d84a439e14f7bb8d5c0f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 812b750add8fe074ea571ff500b4426d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3178,8 +3185,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1409888898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -1.43, y: 0.28, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

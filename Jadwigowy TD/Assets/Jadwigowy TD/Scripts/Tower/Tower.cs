@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour {
     [SerializeField] private GameObject bullet;
     public AudioClip shotSound;
     private AudioSource audioSource;
+    public int maxInstances = -1;
 
     public float Range {
         get { return range; }

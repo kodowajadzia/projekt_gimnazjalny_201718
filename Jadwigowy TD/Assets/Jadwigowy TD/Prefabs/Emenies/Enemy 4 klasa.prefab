@@ -240,14 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771345810fc5d304cabd2c617b02ff7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.25
   minDistance: 0.1
-  health: 12
-  costPerKill: 2
+  health: 6
+  costPerKill: 1
   scorePerKill: 1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.1
   deathSound: {fileID: 8300000, guid: 4477e1745f8c18640bfa51d5f21298e4, type: 3}
+  isBoss: 0
   showPath: 1
 --- !u!212 &212576353696492280
 SpriteRenderer:
