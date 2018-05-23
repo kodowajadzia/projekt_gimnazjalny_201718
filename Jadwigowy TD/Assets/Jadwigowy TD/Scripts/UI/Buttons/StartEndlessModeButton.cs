@@ -7,7 +7,7 @@ namespace UI {
     public class StartEndlessModeButton : MonoBehaviour {
 
         public void StartMode() {
-            SceneManager.LoadScene("Scenes/Endless Mode");
+            SceneManager.LoadScene("Scenes/Game");
         }
     }
 }
