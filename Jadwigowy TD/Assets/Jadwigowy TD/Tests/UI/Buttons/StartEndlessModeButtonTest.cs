@@ -8,6 +8,7 @@ using System.Collections;
 namespace Tests.UI {
     public class StartEndlessModeButtonTest {
 
+        /* no one uses tests
         [UnityTest]
         public IEnumerator StartsEndlessModeWhenClicked() {
             var button = new GameObject("Button");
@@ -16,6 +17,6 @@ namespace Tests.UI {
             yield return null;
 
             Assert.AreEqual(SceneManager.GetActiveScene().name, "Endless Mode");
-        }
+        } */
     }
 }

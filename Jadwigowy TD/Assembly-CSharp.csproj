@@ -77,7 +77,7 @@
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\ButtonWithShortcut.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\ExitButton.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\LinkOpener.cs" />
-    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\StartEndlessModeButton.cs" />
+    <Compile Include="Assets\Jadwigowy TD\Scripts\UI\Buttons\StartGameButton.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\CanvasManager.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\DraggableTeacher.cs" />
     <Compile Include="Assets\Jadwigowy TD\Scripts\UI\SettingsCanvasManager.cs" />

@@ -119,9 +119,11 @@ public class GameController : MonoBehaviour {
             if (isWaveInProgress && spawned && !AreEnemiesAlive)
                 isWaveInProgress = false;
         }
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4) && Input.GetKeyDown(KeyCode.Alpha2))
             IncreaseScore(1);
-        if (Input.GetKey(KeyCode.RightControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4))
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4))
+            Application.Quit();
+        if (Input.GetKey(KeyCode.RightControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKey(KeyCode.F4) && Input.GetKeyDown(KeyCode.Alpha2))
             money += 1;
         if (Input.GetKeyDown(KeyCode.M))
             wave = 32;

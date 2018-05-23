@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace UI {
-    public class StartEndlessModeButton : MonoBehaviour {
+    public class StartGameButton : MonoBehaviour {
 
-        public void StartMode() {
-            SceneManager.LoadScene("Scenes/Game");
+        public void StartGame() {
+            SceneManager.LoadScene(1);
         }
     }
 }
